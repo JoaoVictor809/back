@@ -8,10 +8,17 @@ dotenv.config();
 
 exports.signup = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, cpf, endereco, email, data_nascimento, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 8);
 
-    const user = await User.create({ name, email, password: hashedPassword });
+    const user = await User.create({
+      name,
+      cpf,
+      endereco,
+      email,
+      data_nascimento,
+      password: bcrypt.hashSync(password, 8)
+    })
     res.status(201).send({ message: "Usuário registrado com sucesso!" });
   } catch (err) {
     res.status(500).send({ message: err.message });
