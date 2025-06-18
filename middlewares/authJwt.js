@@ -15,6 +15,8 @@ module.exports = (req, res, next) => {
       return res.status(401).send({ message: "Token inválido!" });
     }
     req.userId = decoded.id;
+    req.userName = decoded.name;
+    req.userEmail = decoded.email;
     next();
   });
 };
