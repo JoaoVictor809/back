@@ -1,17 +1,24 @@
-const { authJwt } = require("../middlewares/authJwt.js");
+// routes/user.routes.js
+const authJwt = require("../middlewares/authJwt.js"); // authJwt is the middleware function
 const controller = require("../controllers/user.controller.js");
 const express = require("express");
 const router = express.Router();
 
 router.put(
-  "/update",
+  "/update", // This is line 6
   [
-    authJwt.verifyToken, // First, verify the token to get req.userId
-    // controller.validateUpdateUser, // Then, validate the input. We'll apply validation inside the controller for now.
-                                   // If express-validator is to be used as middleware, it needs to handle the errors or pass them.
-                                   // For simplicity in this iteration, the controller handles validation directly.
+    authJwt, // This should be the authJwt function itself
+    // controller.validateUpdateUser, // This was commented out
   ],
-  controller.updateUser // Call the actual controller function
+  controller.updateUser 
+);
+
+router.get(
+  "/activity-calendar",
+  [
+    authJwt, // This should be the authJwt function itself
+  ],
+  controller.getActivityCalendar
 );
 
 module.exports = router;

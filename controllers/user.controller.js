@@ -56,3 +56,22 @@ exports.validateUpdateUser = [
   body('email').optional().isEmail().withMessage('Formato de e-mail inválido.'),
   body('name').optional().isString().notEmpty().withMessage('O nome não pode estar vazio.')
 ];
+
+exports.getActivityCalendar = (req, res) => {
+  const userId = req.userId; // Injected by authJwt.verifyToken middleware
+  const { month } = req.query; // Get month from query parameters
+
+  // Basic validation for month parameter (optional, can be enhanced)
+  if (!month) {
+    return res.status(400).send({ message: "Parâmetro 'month' é obrigatório." });
+  }
+
+  // Placeholder response
+  res.status(200).send({
+    message: "Activity calendar data fetched successfully (placeholder).",
+    userId: userId,
+    month: month,
+    // TODO: Implement actual data fetching logic here
+    calendarData: [] 
+  });
+};
