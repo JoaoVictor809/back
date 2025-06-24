@@ -75,3 +75,22 @@ exports.getActivityCalendar = (req, res) => {
     calendarData: [] 
   });
 };
+
+exports.getUserProfile = async (req, res) => {
+  const userId = req.userId; // Injected by authJwt.verifyToken middleware
+
+  try {
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).send({ message: "Usuário não encontrado!" });
+    }
+
+    // Respond with user data (excluding password)
+    const { password, ...userData } = user.get({ plain: true });
+    res.status(200).send(userData);
+
+  } catch (err) {
+    res.status(500).send({ message: err.message || "Ocorreu um erro ao buscar o perfil do usuário." });
+  }
+};

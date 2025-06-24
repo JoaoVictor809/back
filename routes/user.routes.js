@@ -21,4 +21,12 @@ router.get(
   controller.getActivityCalendar
 );
 
+router.get(
+  "/profile",
+  [
+    authJwt, // This should be the authJwt function itself
+  ],
+  controller.getUserProfile
+);
+
 module.exports = router;
