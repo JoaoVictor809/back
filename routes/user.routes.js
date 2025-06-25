@@ -1,6 +1,6 @@
 // routes/user.routes.js
 const authJwt = require("../middlewares/authJwt.js"); // authJwt is the middleware function
-const controller = require("../controllers/user.controller.js");
+const controller = require("../controllers/auth.controller.js"); // CORRIGIDO para auth.controller.js
 const express = require("express");
 const router = express.Router();
 
